@@ -1,0 +1,18 @@
+body{
+    margin: 0;
+    
+}
+.login_box{
+    
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box{
+    border: 5px black solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -4,15 +4,24 @@
         <title>
             Login
         </title>
+        <link rel="stylesheet" href="login.css">
     </head>
     <body>
-        <div>
-            <h1>Login</h1>
-            <label id="email">email</label>
-            <input type="email" id="email" placeholder="enter your email" required>
+        <div class="login_box"> <!--This div inclue all component of this page.. -->
+            <div class="box">
+                <h1>Log into <--cinema name--></h1>
+                <div>
+                    <label id="email">email</label>
+                    <input type="email" id="email" placeholder="enter your email" required>
+                </div>
             <br><br>
-            <label id="password">password</label>
-            <input type="password" id="password" placeholder="enter your password" required>
+            <div>
+                <label id="password">password</label>
+                <input type="password" id="password" placeholder="enter your password" required>
+            </div>
+            <br><br>
+            <button id="signin">Log in</button>
+            </div>
         </div>
     </body>
 </html>
