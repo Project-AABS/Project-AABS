@@ -1,9 +1,9 @@
-var swiper = new Swiper(".movieSwiper", {
+var swiper = new Swiper(".movieswiper", {
     slidesPerView: 3,
     spaceBetween: 20,
-    loop: true,               // infinite sliding
+    loop: true,              
     autoplay: {
-        delay: 9000,          // auto-slide every 2 sec
+        delay: 9000,          
     },
     navigation: {
         nextEl: ".swiper-button-next",
@@ -11,10 +11,7 @@ var swiper = new Swiper(".movieSwiper", {
     }
 });
 
-
-
-
- var swiper = new Swiper(".home", {
+var swiper = new Swiper(".home", {
       spaceBetween: 30,
       centeredSlides: true,
       autoplay: {
@@ -27,6 +24,16 @@ var swiper = new Swiper(".movieSwiper", {
       },
      
     });
-
+    
+var swiper = new Swiper(".offers", {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+     
+    });
+    
 
    

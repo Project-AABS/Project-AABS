@@ -11,17 +11,18 @@
 }
 
 :root{
-    --main-color: #2d7a7d;
+    --main-color: #0d56166d;
     --text-color: #101010;
-    --bg-color: #cdcdcd;
+    --bg-color: #fffafa;
 }
 
 body{
     background-color: var(--text-color);
     color: var(--bg-color);
 }
-.selection{
-    padding: 4.5rem 0 1.5rem;
+
+section{
+    padding: 2rem 0;
 }
 header{
     position: fixed;
@@ -66,6 +67,7 @@ header{
     font-size: 1rem;
     font-weight: 500;
     color: var(--bg-color);
+     transition: color 0.3s ease;
 }
 
 .navbar a::after{
@@ -82,6 +84,16 @@ header{
  .navbar .home_active::after{
     width: 100%;
 }
+
+.navbar a:hover {
+    color: var(--main-color);      /* colour when the mouse is over the link */
+}
+
+.navbar a:active,
+.navbar a:focus {                 /* colour while the link is being clicked / focused */
+    color: var(--main-color);               /* choose whatever colour you like */
+}
+
 #menu-icon{
     font-size: 24px;
     z-index: 10001;
@@ -90,35 +102,139 @@ header{
 }
 .btn{
     display: inline-block;
-    padding: 10px 20px;
     background-color: var(--main-color);
     color: var(--bg-color);
     font-weight: 500;
-    border-radius: 4px;
+    border-radius: 7.5px;
     transition: 0.5s all linear;
 }
-.btn:hover{
-    background-color: transparent;
-    color: var(--main-color);
-    border: 2px solid var(--main-color);
+
+.btn-container{
+    display: flex;
+    gap: 20px;
 }
+
+
+/* Glassmorphism / liquid glass buttons for navbar sign-in, book/play buttons */
+/* Targets: navbar sign-in (.navbar .btn), home 'book now' (.home-text .btn), play button (.play .fi),
+   movie/coming hover buttons (.movie-hover button, .coming-hover button) */
+.btn,
+.home-text .btn,
+.play .fi,
+.movie-hover button,
+.coming-hover button{
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--bg-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
+    border-radius: 12px;
+    padding: 10px 18px;
+    transition: transform .25s ease, box-shadow .25s ease, background .3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Make the circular play icon keep its shape */
+.play .fi{
+    padding: 10px;
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+
+/* Subtle sheen animation */
+.btn::after,
+.home-text .btn::after,
+.play .fi::after,
+.movie-hover button::after,
+.coming-hover button::after{
+    content: '';
+    position: absolute;
+    left: -75%;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.20), rgba(255,255,255,0.04), rgba(255,255,255,0));
+    transform: skewX(-25deg);
+    transition: left .8s cubic-bezier(.2,.9,.2,1);
+    pointer-events: none;
+}
+
+.btn:hover::after,
+.home-text .btn:hover::after,
+.play .fi:hover::after,
+.movie-hover button:hover::after,
+.coming-hover button:hover::after{
+    left: 120%;
+}
+
+/* Hover lift + stronger shadow */
+.btn:hover,
+.home-text .btn:hover,
+.play .fi:hover,
+.movie-hover button:hover,
+.coming-hover button:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+/* Ensure text/icon color swaps on hover for contrast */
+.btn:hover,
+.home-text .btn:hover,
+.movie-hover button:hover,
+.coming-hover button:hover{
+    color: var(--bg-color);
+}
+
 .swiper-slide {
     text-align: center;
     font-size: 18px;
-    /* background: #444; */
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    position: relative; /* for positioning the gradient overlay */
+}
+
+/* black gradient overlay covering half the slide image */
+.home .swiper-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+     background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.85) 20%,
+        rgba(0, 0, 0, 0.6) 40%,
+        rgba(0, 0, 0, 0.3) 60%,
+        rgba(0, 0, 0, 0.05) 80%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    z-index: 10; /* behind home-text (z-index: 1000), but in front of the image */
 }
 
 .swiper-slide img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
 }
 
+/* Only home slider gets full height */
+.home .swiper-slide img {
+    height: 100vh;
+}
+.home {
+    padding: 0;
+}
 .home-text {
     position: absolute;
     top: 50%;
@@ -127,14 +243,15 @@ header{
     z-index: 1000;
     color: #fff;
     text-align: left;
-    max-width: 40%;
+    max-width: 70%;
     padding: 0 150px;
-
+    align-items: flex-start;
     /* stack elements vertically */
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
+
 
 .home-text .btn,
 .home-text .play {
@@ -144,7 +261,7 @@ header{
 .home-text span{
     font-weight: 500;
     color: var(--bg-color);
-    text-transform: uppercase;
+
 }
 .home-text h1{
     font-weight: 700;
@@ -153,19 +270,21 @@ header{
     margin-bottom: 1rem;
 }
 .play{
-  
-    position: static;
-    margin-top: 0.5rem; 
+    display: inline-flex;
+    gap: 12px;
+    margin-top: 0.5rem;
+    align-items: center; 
 }
-.play .bx{
+.play .fi{
    background: var(--bg-color);
-   padding: 7.5px;
+   padding: 8.5px;
+  
    font-size: 2rem;
    border-radius: 100%;
    border: 2px solid var(--main-color);
   color: var(--main-color);
 }
-.play:hover .bx{
+.play:hover .fi{
     background: var(--main-color);
     color: var(--bg-color);
     border: 2px solid var(--main-color);
@@ -184,6 +303,12 @@ header{
     width: 1.5rem !important;
     background-color: var(--main-color) !important;
 }
+.movies,
+.coming,
+.offers,
+.newsletter {
+    margin-top: 6rem;
+}
 
 /* movies */
 
@@ -194,9 +319,19 @@ header{
     font-size: 2rem;
     font-weight: 700;
     text-transform: uppercase;
+    padding-bottom: 40px;
     border-bottom: 3px solid var(--main-color);
 }
-
+/* Prevent Swiper from stretching vertically */
+.movieSwiper,
+.movieSwiper .swiper-wrapper,
+.movieSwiper .swiper-slide {
+    height: auto !important;
+}
+.movie {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
 
 
 .section-title {
@@ -206,8 +341,11 @@ header{
 
 /* Movie Card */
 .movie-card {
-    text-align: center;
-
+    text-align: left;
+    padding: 8px 6px 0 6px;
+}
+.movieswiper{
+    height: auto !important; 
 }
 
 .movie-img {
@@ -251,8 +389,8 @@ header{
     background: var(--main-color);
     color: white;
     border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
+    padding: 15px 15px;
+    border-radius: 15px;
     cursor: pointer;
     transition: background .3s;
 }
@@ -262,13 +400,46 @@ header{
 }
 
 .movie-title {
+    font-size: 1.2rem;
+    color: var(--bg-color);
+    font-weight: 500;
+    align-items: center;
+    gap: 12px;
     margin-top: 10px;
 }
 
-/* Swiper button colors */
-.swiper-button-next,
-.swiper-button-prev {
-    color: white;
+.movie-duration{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.like {
+    display: inline-flex;
+    gap: 8px;
+    margin-top: 0.5rem;
+    align-items: center;
+    font-size: 0.95rem;
+    color: var(--main-color);
+    transition: color 0.3s ease;
+}
+.like:hover {
+    color: var(--bg-color);
+}
+
+.like .fi {
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+.like:hover .fi {
+    color: var(--bg-color);
+}
+.like .fi-rr-play {
+    color: var(--main-color);
+}
+.like.liked{
+    color: var(--bg-color);
 }
 
 
@@ -279,17 +450,17 @@ header{
     margin-left: auto;
     margin-right: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
     gap: 20px;
 }
 .coming-card {
-    text-align: center;
+    text-align: left;
 
 }
 
 .coming-img {
     width: 100%;
-    height: 330px;
+    height: 400px;
     position: relative;
     overflow: hidden;
     border-radius: 10px;
@@ -329,7 +500,7 @@ header{
     color: white;
     border: none;
     padding: 8px 15px;
-    border-radius: 5px;
+    border-radius: 15px;
     cursor: pointer;
     transition: background .3s;
 }
@@ -339,8 +510,220 @@ header{
 }
 
 .coming-title {
+    text-align: left;
     margin-top: 10px;
 }
+.reldate{
+    text-align: left;
+    font-size: 0.9rem;
+    color: var(--main-color);
+    font-weight: 500;
+    padding-top: 10px;
+}
+
+.offer{
+    height: auto
+}
+.offcontainer img {
+    width: 100%;                    /* fill the slide */
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50px;
+ transition: transform .4s;
+}
+.offcontainer img:hover {
+    transform: scale(1.02);
+}
+
+.newsletter .btn{
+    color:  #ffffffa8;
+
+}   
 
 
 
+.newsletter{
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 2rem;
+}
+
+.newsletter h2{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--bg-color);
+}
+
+/* Glass effect for newsletter form */
+.newsletter form {
+   background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--bg-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
+    border-radius: 12px;
+    padding: 10px 18px;
+    transition: transform .25s ease, box-shadow .25s ease, background .3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.newsletter form input[type="email"] {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1rem;
+    width: 280px;
+}
+
+.newsletter form:focus-within {
+    border: 1px solid var(--main-color);
+    box-shadow: 0 0 15px rgba(13, 86, 22, 0.6);
+}
+
+.newsletter form .email{
+    width: 300px;
+}
+.newsletter form input::placeholder{
+    color: #ffffffa8;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.newsletter form .btn{
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;  
+}
+
+footer{
+    width: 100%;
+    background: linear-gradient(to right, var(--main-color), var(--text-color));
+    color: rgb(255, 255, 255);
+    padding: 100px 0 30px;
+    border-top-left-radius: 125px;
+    font-size: 13px;
+    line-height: 20px;
+}
+.row{
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.col{
+    flex-basis: 25%;
+    padding: 10px;
+}
+
+.col:nth-child(2) .col:nth-child(3){
+    flex-basis: 15%;
+}
+
+footer .col .logo{
+    width:80px;
+    margin-bottom: 30px;
+}
+
+footer .col h2{
+    font-size: 1.2rem;
+    margin-bottom: 60px;
+    position: relative;
+}
+footer .col h2 a{
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease;
+
+}
+footer .col h2 a:hover{
+    color: var(--main-color);
+}
+footer .col h2::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 50px;
+    height: 2px;
+    background-color: var(--bg-color);
+}
+
+footer .col h3{
+    width: fit-content;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+footer .col h3::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 50px;
+    height: 2px;
+    background-color: var(--bg-color);
+}
+
+footer p.email{
+    width: fit-content;
+    border: 1px solid transparent;
+    margin-bottom: 20px;
+    padding: 4px 8px;
+}
+
+footer .col ul li{
+    list-style: none;
+    margin-bottom: 13px;
+}
+footer .col ul li a{
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+footer .col ul li a:hover{
+    color: var(--main-color);
+}
+
+footer .col .social .fi{
+    width: 60px;
+    height: 60px;
+
+    text-align: center;
+    line-height: 60px;            /* vertically center icon */
+    font-size: 2rem;
+    color: var(--bg-color);       /* icon color */
+    margin-right: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+footer .col .social .fi:hover{
+    background-color: transparent;
+    color: var(--main-color);
+}
+
+hr{
+    width: 90%;
+    height: 0;
+    border-bottom: 1px solid var(--bg-color);
+    margin: 20px auto;
+}
+
+.copyright{
+    text-align: center;
+   
+}
