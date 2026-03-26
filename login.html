@@ -1,27 +1,50 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>
-            Login
-        </title>
-        <link rel="stylesheet" href="login.css">
-    </head>
-    <body>
-        <div class="login_box"> <!--This div inclue all component of this page.. -->
-            <div class="box">
-                <h1>Log into <--cinema name--></h1>
-                <div>
-                    <label id="email">email</label>
-                    <input type="email" id="email" placeholder="enter your email" required>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABBS Cinema | Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body id="main-body">
+    <div class="container" id="container">
+        
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <h1>Create Account</h1>
+                <input type="text" placeholder="Full Name" required />
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Password" required />
+                <button type="button">Sign Up</button>
+            </form>
+        </div>
+
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>Login</h1>
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Password" required />
+                <a href="#" style="margin-bottom: 15px; color: #333; text-decoration: none; font-size: 14px;">Forgot password?</a>
+                <button type="button">Login</button>
+            </form>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Login to book your favorite seats</p>
+                    <button class="ghost" id="signIn">Login</button>
                 </div>
-            <br><br>
-            <div>
-                <label id="password">password</label>
-                <input type="password" id="password" placeholder="enter your password" required>
-            </div>
-            <br><br>
-            <button id="signin">Log in</button>
+                <div class="overlay-panel overlay-right">
+                    <h1>WELCOME TO ABBS CINEMA</h1>
+                    <p>Don't have an account? Join us now!</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
             </div>
         </div>
-    </body>
+    </div>
+
+    <script src="login.js"></script>
+</body>
 </html>
