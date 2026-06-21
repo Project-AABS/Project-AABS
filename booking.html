@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Tickets - AABS Movies</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/3.0.0/uicons-brands/css/uicons-brands.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-chubby/css/uicons-solid-chubby.css"
+    />
+
+    <link rel="stylesheet" href="web_page.css" />
+    <link rel="stylesheet" href="booking.css"/>
+  </head>
+  <body>
+    <header>
+      <a href="web_page.html" class="logo">
+        <i class="fi fi-sr-clapper-open"></i> AABS Movies
+      </a>
+      <ul class="navbar">
+        <li><a href="web_page.html#home">Home</a></li>
+        <li><a href="web_page.html#movies">Movies</a></li>
+        <li><a href="web_page.html#coming">Upcoming Movies</a></li>
+        <li><a href="web_page.html#Offers">Offers</a></li>
+        <li><a href="web_page.html#newsletter">News Letter</a></li>
+      </ul>
+      <div class="btn-container">
+        <a href="#" class="btn">Sign In</a>
+        <a href="#" class="btn">Register</a>
+      </div>
+    </header>
+    <div class="movie-banner">
+    <h1>Booking for: <span id="movie-name-display">Loading...</span></h1>
+
+    <main class="booking-main">
+      <div class="steps">
+        <div class="step active" id="step1-indicator">1. Showtime</div>
+        <div class="step" id="step2-indicator">2. Seats</div>
+        <div class="step" id="step3-indicator">3. Payment</div>
+        <div class="step" id="step4-indicator">4. Ticket</div>
+      </div>
+
+      <div id="step1" class="step-content">
+        <h2>Choose Date & Showtime</h2>
+      </div>
+
+      <div id="step2" class="step-content hidden">
+        <h2>Select Your Seats</h2>
+      </div>
+
+      <div id="step3" class="step-content hidden">
+        <h2>Payment</h2>
+      </div>
+
+      <div id="step4" class="step-content hidden">
+        <h2>Your Ticket</h2>
+      </div>
+    </main>
+
+    <footer>
+      <div class="row">
+        <div class="col">
+          <a href="#" class="logo">
+            <i class="fi fi-sr-clapper-open"></i> AABS Movies
+          </a>
+          <h2><a href="#about">About Us</a></h2>
+        </div>
+        <div class="col">
+          <h3>Office</h3>
+          <p>123 Main Street,</p>
+          <p>City, Country</p>
+          <p class="email">Email: info@aabs.com</p>
+          <h4>+977-1313131313</h4>
+        </div>
+        <div class="col">
+          <h3>Links</h3>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#movies">Movies</a></li>
+            <li><a href="#coming">Upcoming Movies</a></li>
+            <li><a href="#Offers">Offers</a></li>
+            <li><a href="#newsletter">News letter</a></li>
+          </ul>
+        </div>
+
+        <div class="col">
+          <div class="social">
+            <a href="#"><i class="fi fi-brands-instagram"></i></a>
+            <a href="https://github.com/Project-AABS/Project-AABS"
+              ><i class="fi fi-brands-github"></i
+            ></a>
+            <a href="#"><i class="fi fi-brands-facebook"></i></a>
+            <a href="#"><i class="fi fi-brands-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <p class="copyright">© 2026 AABS Movies. All rights reserved.</p>
+    </footer>
+
+    <script src="booking.js"></script>
+  </body>
+</html>

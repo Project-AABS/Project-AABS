@@ -34,6 +34,23 @@ var swiper = new Swiper(".offers", {
       },
      
     });
-    
+    // Track scroll position to detect direction
+let lastScrollY = window.scrollY;
+const header = document.querySelector("header");
+
+window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling DOWN and past 100px — hide navbar
+        header.classList.add("hide-nav");
+    } else {
+        // Scrolling UP — show navbar
+        header.classList.remove("hide-nav");
+    }
+
+    // Update last position for next scroll event
+    lastScrollY = currentScrollY;
+});
 
    
